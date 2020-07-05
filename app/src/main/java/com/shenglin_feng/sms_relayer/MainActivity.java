@@ -1,22 +1,16 @@
 package com.shenglin_feng.sms_relayer;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
-    private SharedPreferences sp;
+    public static SharedPreferences sp;
     private Switch switch1;
     private EditText editTextTextPersonName;
 
@@ -56,18 +50,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton btn, boolean status) {
-        switch (btn.getId()) {
-            case R.id.switch1:
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putBoolean("switch1", status);
-                editor.apply();
-                if(status) {
-                    sendToast("总开关已打开 √");
-                } else {
-                    sendToast("总开关已关闭 ×");
-                }
-                break;
-        }
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("switch1", status);
+        editor.apply();
+        if(status) sendToast("转发服务已开启 √");
+        else sendToast("转发服务已关闭 ×");
     }
 
     private void sendToast(String msg) {
